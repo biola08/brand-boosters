@@ -1,0 +1,110 @@
+// _font-face.scss
+@font-face {
+    font-family: "Alegreya SC";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/alegreyasc-bold-webfont.woff2") format("woff2"),
+      url("/fonts/alegreyasc-bold-webfont.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/sourcesanspro-regular-webfont.woff2") format("woff2"),
+      url("/fonts/sourcesanspro-regular-webfont.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 500;
+    font-display: swap;
+    src: url("/fonts/sourcesanspro-semibold-webfont.woff2") format("woff2"),
+      url("/fonts/sourcesanspro-semibold-webfont.woff") format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/sourcesanspro-bold-webfont.woff2") format("woff2"),
+      url("/fonts/sourcesanspro-bold-webfont.woff") format("woff");
+  }
+
+
+// _general.scss
+  body {
+    font-family: $body-font-family;
+    font-weight: $body-font-weight;
+    font-size: $body-font-size;
+    color: $body-text-color;
+    background-color: $body-background-color;
+    line-height: $body-line-height;
+  }
+  
+  a {
+    color: $link-color;
+  }
+  
+  a:is(:hover, :focus) {
+    color: $link-color-hover;
+  }
+
+//   _reset.scss
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// _root.scss
+
+:root {
+    @each $color, $shade-map in $active-theme {
+      @each $shade, $value in $shade-map {
+        --#{$color}-#{$shade}: #{$value};
+      }
+    }
+  
+    @each $screen-size, $size-map in $font-sizes {
+      @if $screen-size == small {
+        @each $size-name, $size-value in $size-map {
+          --fs-#{$size-name}: #{$size-value};
+        }
+      } @else {
+        @include mq($screen-size) {
+          @each $size-name, $size-value in $size-map {
+            --fs-#{$size-name}: #{$size-value};
+          }
+        }
+      }
+    }
+  }

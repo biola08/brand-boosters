@@ -1,1 +1,464 @@
 
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+
+
+// _breakpoints.scss
+$breakpoints: (
+  small: 30em,
+  medium: 45em,
+  large: 65em,
+);
+
+
+// _colors.scss
+
+// global color tokens
+$-clr-white: hsl(0 0% 100%);
+$-clr-grey-light: hsl(0 0% 91%);
+$-clr-grey-mid: hsl(0 0% 42%);
+$-clr-grey-dark: hsl(0 0% 25%);
+
+$-clr-blue-very-light: hsl(213 47% 96%);
+$-clr-blue-light: hsl(218 39% 86%);
+$-clr-blue-mid: hsl(218 48% 39%);
+$-clr-blue-dark: hsl(218 36% 23%);
+
+$-clr-green-very-light: hsl(168 98% 81%);
+$-clr-green-light: hsl(168 96% 51%);
+$-clr-green-mid: hsl(169 100% 41%);
+$-clr-green-dark: hsl(168 80% 19%);
+
+$-clr-yellow-light: hsl(36 100% 86%);
+$-clr-yellow-mid: hsl(36 80% 65%);
+$-clr-yellow-dark: hsl(36 77% 30%);
+
+$-clr-pink-light: hsl(340 81% 84%);
+$-clr-pink-mid: hsl(340 68% 63%);
+$-clr-pink-dark: hsl(340 76% 27%);
+
+$-clr-cyan-light: hsl(194 98% 81%);
+$-clr-cyan-mid: hsl(197 64% 53%);
+$-clr-cyan-dark: hsl(195 69% 27%);
+
+$default: (
+  "neutral": (
+    "000": $-clr-white,
+    "100": $-clr-grey-light,
+    "400": $-clr-grey-mid,
+    "700": $-clr-grey-dark,
+  ),
+  "brand-primary": (
+    "100": $-clr-blue-very-light,
+    "200": $-clr-blue-light,
+    "400": $-clr-blue-mid,
+    "700": $-clr-blue-dark,
+  ),
+  "brand-accent": (
+    "100": $-clr-green-very-light,
+    "200": $-clr-green-light,
+    "400": $-clr-green-mid,
+    "700": $-clr-green-dark,
+  ),
+  "yellow": (
+    "300": $-clr-yellow-light,
+    "400": $-clr-yellow-mid,
+    "500": $-clr-yellow-dark,
+  ),
+  "pink": (
+    "300": $-clr-pink-light,
+    "400": $-clr-pink-mid,
+    "500": $-clr-pink-dark,
+  ),
+  "cyan": (
+    "300": $-clr-cyan-light,
+    "400": $-clr-cyan-mid,
+    "500": $-clr-cyan-dark,
+  ),
+);
+
+// contextual color tokens
+$color-neutral-000: var(--neutral-000);
+$color-neutral-100: var(--neutral-100);
+$color-neutral-400: var(--neutral-400);
+$color-neutral-700: var(--neutral-700);
+
+$color-brand-primary-100: var(--brand-primary-100);
+$color-brand-primary-200: var(--brand-primary-200);
+$color-brand-primary-400: var(--brand-primary-400);
+$color-brand-primary-700: var(--brand-primary-700);
+
+$color-brand-accent-100: var(--brand-accent-100);
+$color-brand-accent-200: var(--brand-accent-200);
+$color-brand-accent-400: var(--brand-accent-400);
+$color-brand-accent-700: var(--brand-accent-700);
+
+$color-yellow-300: var(--yellow-300);
+$color-yellow-400: var(--yellow-400);
+$color-yellow-500: var(--yellow-500);
+
+$color-pink-300: var(--pink-300);
+$color-pink-400: var(--pink-400);
+$color-pink-500: var(--pink-500);
+
+$color-cyan-300: var(--cyan-300);
+$color-cyan-400: var(--cyan-400);
+$color-cyan-500: var(--cyan-500);
+
+// _typography.scss
+
+$-ff-montserrat: "Montserrat", sans-serif;
+$-ff-inter: "Inter", sans-serif;
+
+$font-family-base: $-ff-inter;
+$font-family-accent: $-ff-montserrat;
+
+$font-sizes: (
+  // can also use clamp here
+  "small": (
+    "900": 2.625rem,
+    "800": 2.25rem,
+    "750": 1.75,
+    "700": 1.5rem,
+    "400": 1.125rem,
+    "300": 1rem,
+    "200": 0.875rem,
+  ),
+  "large": (
+    "900": 3.5rem,
+    "800": 2.625rem,
+    "750": 2rem,
+  ),
+);
+
+$font-size-200: var(--fs-200);
+$font-size-300: var(--fs-300);
+$font-size-400: var(--fs-400);
+$font-size-700: var(--fs-700);
+$font-size-750: var(--fs-750);
+$font-size-800: var(--fs-800);
+$font-size-900: var(--fs-900);
+
+$-fw-400: 400;
+$-fw-600: 600;
+$-fw-700: 700;
+
+$font-weight-default: $-fw-400;
+$font-weight-semi-bold: $-fw-600;
+$font-weight-bold: $-fw-700;
+
+
+// _sizes.scss
+
+// for creating utility classes
+$sizes: (
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  5: 1.25rem,
+  6: 1.5rem,
+  7: 1.75rem,
+  8: 2rem,
+  9: 2.5rem,
+  10: 3rem,
+  11: 4rem,
+  12: 5rem,
+  13: 6rem,
+  14: 8rem,
+  15: 10rem,
+);
+
+// for use in the code base
+$size-1: 0.25rem;
+$size-2: 0.5rem;
+$size-3: 0.75rem;
+$size-4: 1rem;
+$size-5: 1.25rem;
+$size-6: 1.5rem;
+$size-7: 1.75rem;
+$size-8: 2rem;
+$size-9: 2.5rem;
+$size-10: 3rem;
+$size-11: 4rem;
+$size-12: 5rem;
+$size-13: 6rem;
+$size-14: 8rem;
+$size-15: 10rem;
+
+
+// _tokens.scss
+$active-theme: $default;
+$enable-media-query-dark-mode: false;
+
+// Contextual
+$color-text-default: $color-neutral-700;
+$color-background-default: $color-neutral-000;
+$color-text-interactive-default: $color-brand-primary-400;
+$color-text-interactive-hover: $color-brand-accent-700;
+
+// set to 0 to disable
+$letter-spacing-loose: 0;
+
+$border-radius-1: $size-1;
+$border-radius-2: $size-4;
+$border-radius-3: 3.75rem;
+
+$box-shadow-1: 0px 6px 5px rgb(0, 0, 0, 0.012),
+  0px 22px 18px rgb(0, 0, 0, 0.018), 0px 100px 80px rgb(0, 0, 0, 0.03);
+
+$box-shadow-2: 0px 6px 5px rgb(0, 0, 0, 0.016),
+  0px 22px 18px rgb(0, 0, 0, 0.024), 0px 100px 80px rgb(0, 0, 0, 0.04);
+
+$box-shadow-3: 0px 6px 5px rgb(0, 0, 0, 0.02), 0px 22px 18px rgb(0, 0, 0, 0.03),
+  0px 100px 80px rgb(0, 0, 0, 0.05);
+
+$box-shadow-4: 0px 6px 5px rgb(0, 0, 0, 0.03), 0px 22px 18px rgb(0, 0, 0, 0.042),
+  0px 100px 80px rgb(0, 0, 0, 0.07);
+
+$box-shadow-5: 0px 6px 5px rgb(0, 0, 0, 0.04), 0px 22px 18px rgb(0, 0, 0, 0.06),
+  0px 100px 80px rgb(0, 0, 0, 0.1);
+
+// body
+$body-font-family: $font-family-base;
+$body-font-size: $font-size-400;
+$body-line-height: 1.7;
+$body-font-weight: $font-weight-default;
+$body-text-color: $color-text-default;
+$body-background-color: $color-background-default;
+
+$link-color: $color-text-interactive-default;
+$link-color-hover: $color-text-interactive-hover;
+
+$heading-font-family: $font-family-accent;
+$heading-color-default: $color-brand-primary-700;
+$heading-font-weight: $font-weight-bold;
+$heading-letter-spacing: $letter-spacing-loose;
+$heading-line-height: 1.1;
+$heading-text-transform: none;
+
+$heading-1-font-size: $font-size-900;
+$heading-1-color: $heading-color-default;
+$heading-2-font-size: $font-size-800;
+$heading-2-color: $heading-color-default;
+$heading-3-font-size: $font-size-700;
+$heading-3-color: $heading-color-default;
+
+// layout
+$grid-gap: $size-6;
+$flex-group-gap: $size-4;
+
+// not being used
+//$hero-padding-block: clamp(15rem, 15vh, 20rem);
+$section-padding-block: clamp(3.75rem, 10vh, 5rem);
+
+$container-min-margin-inline: $size-4;
+$container-max-width: 63rem;
+$container-max-width-narrow: 42rem;
+$container-max-width-wide: 68.75rem;
+
+// site header
+$site-header-background-color: $color-brand-primary-100;
+$site-header-color: $color-neutral-700;
+$site-header-padding: $size-8 0;
+$site-header-margin: 0;
+$site-header-jusitifcation-small-screens: space-between;
+$site-header-jusitifcation-large-screens: space-between;
+$site-header-alignment: center;
+
+//navigation
+$navigation-color: $site-header-color;
+$navigation-color-hover: $color-brand-accent-400;
+$navigation-font-size: $font-size-400;
+$navigation-gap: $size-10;
+$navigation-gap-mobile: $size-8;
+$navigation-link-text-decoration: none;
+$navigation-font-family: $body-font-family;
+$navigation-font-weight: $body-font-weight;
+
+// site footer
+$footer-background-color: $color-neutral-000;
+$footer-text-color: $color-neutral-400;
+$footer-link-color: $color-neutral-700;
+$footer-link-color-hover: $color-brand-accent-400;
+$footer-link-font-family: $font-family-base;
+$footer-link-text-decoration: none;
+
+$footer-border-bottom-color:$color-neutral-100;
+$footer-border-bottom-margin-block: $size-4 $size-6;
+
+// buttons
+$button-font-family: $body-font-family;
+$button-font-size: $font-size-400;
+$button-font-weight: $font-weight-default;
+$button-text-transform: none;
+$button-padding: .75em 1em;
+$button-round-padding: .75em 2em;
+$button-border: 0;
+$button-round-border-radius: $border-radius-3;
+$button-border-radius: $border-radius-1;
+
+$button-default-background: transparent;
+$button-default-hover-background:$color-neutral-100;
+
+$button-primary-color:  $color-neutral-000;
+$button-primary-background: $color-brand-primary-400;
+$button-primary-color-hover: $color-brand-primary-700;
+$button-primary-background-hover: $color-cyan-300;
+$button-accent-color: $color-brand-primary-700;
+$button-accent-background: $color-brand-accent-400;
+$button-accent-color-hover: $color-brand-primary-700;
+$button-accent-background-hover: $color-brand-accent-200;
+
+// cards
+$card-flow-spacing: $size-2;
+$card-padding: $size-6;
+$card-shadow: none;
+$card-border-radius: $border-radius-2;
+$card-background-default: $color-neutral-100;
+$card-color-default: $body-text-color;
+$card-font-family: $body-font-family;
+$card-line-height: $body-line-height;
+$card-heading-color-default: $card-color-default;
+$card-heading-font-size: $font-size-700;
+
+// checkmarks
+$checkmark-color: $color-brand-accent-400;
+$checkmark-width: 1.4rem;
+$circle-checkmark-color: $color-brand-accent-400;
+$circle-checkmark-stroke: $color-brand-accent-400;
+$circle-checkmark-width: 2.7rem;
+
+// price tag
+$price-tag-font-size: $font-size-800;
+$price-tag-font-weight: $font-weight-bold;
+$price-tag-text-align: center;
+
+// scroll bar
+$scroll-bar-color: $color-brand-accent-200;
+$scroll-bar-color-hover: $color-brand-accent-100;
+$scroll-bar-background-color: $color-brand-primary-700;
+$scroll-bar-border-radius: $border-radius-2;
+
+// page specific
+
+// about-us
+// hero
+$hero-image-padding-top:3.75rem;
+
+// benefits
+$benefits-image-max-width: 23rem;
+$benefits-grid-gap-mobile:3.5rem;
+$benefits-grid-gap-desktop:5.5rem;
+
+$benefits-paragraph-color: $color-neutral-000;
+$benefits-subheader-font-size:$font-size-750;
+$benefits-subheader-font-family:$font-family-accent;
+$benefits-subheader-font-weight:$font-weight-default;
+
+$benefits-row-jusitifcation:space-between;
+$benefits-row-border-padding-bottom:$size-4;
+$benefits-row-border-bottom: 1px solid $color-neutral-000;
+
+$benefits-subheader-active-font-weight:$font-weight-semi-bold;
+$benefits-icon-svg-fill-active: $color-brand-accent-200;
+$benefits-icon-circle-stroke-active: $color-brand-accent-200;
+$benefits-icon-path-arrow-active: $color-brand-primary-700;
+
+// testimonials
+$testimonials-header-color: $color-neutral-400;
+$testimonials-header-margin-bottom: $size-8;
+
+$testimonials-review-font-size: $font-size-700;
+$testimonials-review-max-width: 40ch;
+
+$testimonials-information-font-size: $font-size-400;
+$testimonials-information-header-font-weight: $font-weight-bold;
+$testimonials-information-p-color: $color-neutral-400;
+
+$testimonials-image-max-width: 15rem;
+
+
+// price plan
+$price-plan-margin-top: 3.3rem;
+$price-plan-background-color: $color-brand-primary-100;
+$price-plan-border-radius: $border-radius-2;
+$price-plan-max-width: 17.9rem;
+$price-plan-height: 40.125rem;
+
+$price-plan-price-margin-block: $size-6 2.6rem;
+
+$price-plan-service-gap: .6rem;
+$price-plan-service-align: flex-start;
+$price-plan-service-flow-space: .6rem;
+
+$price-plan-button-margin-block: $size-7;
+$price-plan-button-align: end;
+
+
+
+// comparison
+
+
+// _functions.scss
+@function clr($color, $shade) {
+    @if map.has-key($colors, $color, $shade) {
+      @return map.get($colors, $color, $shade);
+    } @else {
+      @error '$colors does not have that color!';
+    }
+  }
+  
+  @function fs($font-size) {
+    @if map.has-key($font-sizes, $font-size) {
+      @return map.get($font-sizes, $font-size);
+    } @else {
+      @error '$font-sizes does not have that size!';
+    }
+  }
+  
+  @function size($size) {
+    @if map.has-key($sizes, $size) {
+      @return map.get($sizes, $size);
+    } @else {
+      @error '$sizes does not have that size!';
+    }
+  }
+
+
+// _mixins.scss
+@mixin mq($size, $min-max:min) {
+  @if map.has-key($breakpoints, $size) {
+    $breakpoint: map-get($breakpoints, $size);
+    @media screen and (#{$min-max}-width: $breakpoint) {
+      @content;
+    }
+  } @else if meta.type-of($size) == number {
+    @if math.is-unitless($size) {
+      @error 'when using a number with @mq() make sure to include a unit';
+    } @else {
+      @media screen and (#{$min-max}-width: $size) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'the keyword #{$size} is not in the $breakpoints map';
+  }
+}
+
+@mixin heading($fs, $color: $heading-color-default) {
+  font-size: $fs;
+  color: $color;
+
+  font-family: $heading-font-family;
+  text-transform: $heading-text-transform;
+  letter-spacing: $heading-letter-spacing;
+  font-weight: $heading-font-weight;
+  line-height: $heading-line-height;
+}
+
+
+
+
+
